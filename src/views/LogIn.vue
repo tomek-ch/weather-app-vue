@@ -12,14 +12,14 @@
   </form>
 </template>
 
-<script>
+<script lang="ts">
 import { ref } from "vue";
 export default {
   setup() {
     const login = ref("");
     const password = ref("");
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: Event) => {
       e.preventDefault();
       console.log({ login, password });
     };
