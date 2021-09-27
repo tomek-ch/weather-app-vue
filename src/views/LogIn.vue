@@ -1,14 +1,14 @@
 <template>
-  <form @submit="handleSubmit">
+  <form @submit="handleSubmit" class="form-group">
     <label>
       Login
-      <input v-model="login" />
+      <input v-model="login" class="form-control" />
     </label>
     <label>
       Password
-      <input v-model="password" />
+      <input v-model="password" class="form-control" />
     </label>
-    <button>Log in</button>
+    <button class="btn btn-primary">Log in</button>
   </form>
 </template>
 
