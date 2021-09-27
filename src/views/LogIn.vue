@@ -1,5 +1,5 @@
 <template>
-  <form @submit="handleSubmit" class="form-group">
+  <form @submit="handleSubmit">
     <label>
       Login
       <input v-model="login" class="form-control" />
@@ -29,4 +29,13 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+form {
+  max-width: 400px;
+  margin: auto;
+}
+
+label {
+  display: block;
+}
+</style>
