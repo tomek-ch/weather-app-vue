@@ -9,7 +9,9 @@
         Add city
       </button>
     </form>
-    <div v-if="error">{{ error }}</div>
+    <div v-if="error" class="alert alert-warning" role="alert">
+      {{ error }}
+    </div>
     <div v-for="city in weatherData" :key="city" class="list-group">
       <CityItem :city="city" />
     </div>
