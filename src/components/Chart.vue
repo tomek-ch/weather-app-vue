@@ -31,6 +31,7 @@ export default defineComponent({
       required: true,
     },
     unit: String,
+    color: String,
   },
   setup(props) {
     const values = props.data.map(({ value }) => value);
@@ -66,11 +67,13 @@ export default defineComponent({
   height: 200px;
   align-items: flex-end;
   grid-column: 2/3;
+  padding: 0 0.5em;
 }
 
 .bar {
   background-color: dodgerblue;
-  width: 2em;
+  width: 1em;
+  border-radius: 10px 10px;
 }
 
 .x-labels {
