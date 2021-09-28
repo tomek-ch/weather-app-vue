@@ -10,6 +10,7 @@
       <div>{{ city.name }}</div>
       <div>{{ city.temperature }}°C</div>
       <div>Humidity: {{ city.humidity }}%</div>
+      <img :src="city.icon" />
     </div>
   </div>
 </template>
@@ -49,5 +50,9 @@ form {
 
 button {
   white-space: nowrap;
+}
+
+img {
+  filter: drop-shadow(0px 0px 5px darkgray);
 }
 </style>
