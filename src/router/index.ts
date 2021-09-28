@@ -10,7 +10,7 @@ const routes: Array<RouteRecordRaw> = [
     component: Home,
   },
   {
-    path: "/city/:id",
+    path: "/city/:name",
     name: "Post",
     component: City,
   },
