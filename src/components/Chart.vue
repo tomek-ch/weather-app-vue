@@ -1,9 +1,9 @@
 <template>
   <div class="chart">
     <div class="y-labels">
-      <div>{{ max }}</div>
-      <div>{{ (max / 2).toFixed(2) }}</div>
-      <div>0.00</div>
+      <div>{{ max }}{{ unit }}</div>
+      <div>{{ max / 2 }}{{ unit }}</div>
+      <div>0{{ unit }}</div>
     </div>
     <div class="row bars">
       <div
@@ -30,6 +30,7 @@ export default defineComponent({
       type: Array as PropType<{ value: number; label: string }[]>,
       required: true,
     },
+    unit: String,
   },
   setup(props) {
     const values = props.data.map(({ value }) => value);

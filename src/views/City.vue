@@ -8,7 +8,7 @@
       </div>
       <img :src="city.icon" />
     </div>
-    <Chart :data="chartData" />
+    <Chart :data="chartData" unit="°C" />
   </div>
 </template>
 
@@ -38,7 +38,7 @@ export default defineComponent({
     const chartData = computed(() =>
       city.value
         ? city.value?.forecast.map(({ temperature, dt }) => ({
-            value: temperature,
+            value: Math.round(temperature),
             label: getTime(dt, city.value?.timezone as number),
           }))
         : []
