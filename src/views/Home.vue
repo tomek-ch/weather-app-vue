@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div>
     <form @submit="handleSubmit">
       <input v-model="input" class="form-control" />
       <button class="btn btn-primary" :disabled="cities.includes(input)">

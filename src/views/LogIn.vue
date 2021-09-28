@@ -29,9 +29,9 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 form {
-  max-width: 400px;
+  max-width: 500px;
   margin: auto;
 }
 
