@@ -1,7 +1,7 @@
 <template>
   <div>
     <form @submit="handleSubmit">
-      <input v-model="input" class="form-control" />
+      <input v-model="input" class="form-control" placeholder="London" />
       <button class="btn btn-primary" :disabled="cities.includes(input)">
         Add city
       </button>
