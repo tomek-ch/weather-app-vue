@@ -1,20 +1,43 @@
 <template>
-  <router-view @add-city="addCity" :cities="cities" />
+  <router-view
+    @add-city="addCity"
+    :cityNames="cityNames"
+    :weatherData="weatherData"
+  />
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, watchEffect } from "vue";
+import CityWeather from "./types/CityWeather";
+import getCities from "./utils/getCities";
+import getCity from "./utils/getCity";
 
 export default defineComponent({
   setup() {
     {
-      const cities = ref<string[]>(["London"]);
+      const localData = localStorage.getItem("cityNames");
+      const cityNames = ref<string[]>(["London"]);
+      cityNames.value = localData ? JSON.parse(localData) : [];
 
-      const addCity = (city: string) => {
-        cities.value = [city, ...cities.value];
+      watchEffect(() => {
+        localStorage.setItem("cityNames", JSON.stringify(cityNames.value));
+      });
+
+      const weatherData = ref<CityWeather[]>([]);
+      getCities(cityNames.value).then((data) => (weatherData.value = data));
+
+      const addCity = async (name: string) => {
+        const data = await getCity(name);
+
+        if (data) {
+          cityNames.value.push(name);
+          weatherData.value.push(data);
+        } else {
+          console.log("no city");
+        }
       };
 
-      return { cities, addCity };
+      return { weatherData, addCity, cityNames };
     }
   },
 });
