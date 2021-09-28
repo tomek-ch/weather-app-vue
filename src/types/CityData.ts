@@ -1,6 +1,7 @@
 interface CityData {
   city: {
     name: string;
+    timezone: number;
   };
   list: {
     dt: number;

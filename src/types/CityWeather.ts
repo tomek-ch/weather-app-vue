@@ -6,6 +6,7 @@ interface Forecast {
 
 interface CityWeather {
   name: string;
+  timezone: number;
   icon: string;
   humidity: number;
   temperature: number;

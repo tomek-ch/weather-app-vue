@@ -19,6 +19,7 @@ async function getWeather(location: string) {
 
       return {
         name: data.city.name,
+        timezone: data.city.timezone,
         temperature: data.list[0].main.temp,
         humidity: data.list[0].main.humidity,
         icon: `http://openweathermap.org/img/wn/${data.list[0].weather[0].icon}@2x.png`,
