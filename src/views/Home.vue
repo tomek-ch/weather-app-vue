@@ -2,7 +2,9 @@
   <div class="home">
     <form @submit="handleSubmit">
       <input v-model="input" class="form-control" />
-      <button class="btn btn-primary">Add city</button>
+      <button class="btn btn-primary" :disabled="cities.includes(input)">
+        Add city
+      </button>
     </form>
     <div v-for="city in cities" :key="city">
       {{ city }}
