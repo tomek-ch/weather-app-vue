@@ -55,8 +55,4 @@ form {
 button {
   white-space: nowrap;
 }
-
-img {
-  filter: drop-shadow(0px 0px 5px darkgray);
-}
 </style>

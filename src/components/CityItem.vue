@@ -19,3 +19,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+img {
+  filter: drop-shadow(0px 0px 5px darkgray);
+}
+</style>
