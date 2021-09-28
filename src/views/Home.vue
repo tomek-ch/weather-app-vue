@@ -25,6 +25,7 @@ export default defineComponent({
     const handleSubmit = (e: Event) => {
       e.preventDefault();
       context.emit("add-city", input.value);
+      input.value = "";
     };
 
     return { input, handleSubmit };
