@@ -4,6 +4,9 @@
     <div>{{ city.temperature }}°C</div>
     <div>Humidity: {{ city.humidity }}%</div>
     <img :src="city.icon" />
+    <div v-for="item in city.forecast" :key="item.dt">
+      {{ item.temperature }}°C, {{ item.humidity }}%
+    </div>
   </div>
 </template>
 

@@ -1,4 +1,4 @@
-import CityWeather from "@/types/CityWeather";
+import CityData from "@/types/CityData";
 
 async function getWeather(location: string) {
   const url = "https://api.openweathermap.org/data/2.5/forecast";
@@ -9,13 +9,21 @@ async function getWeather(location: string) {
   try {
     const response = await fetch(endpoint);
     if (response.ok) {
-      const data = await response.json();
+      const data: CityData = await response.json();
+
+      const forecast = data.list.slice(0, 6).map((item) => ({
+        temperature: item.main.temp,
+        humidity: item.main.humidity,
+        dt: item.dt,
+      }));
+
       return {
         name: data.city.name,
         temperature: data.list[0].main.temp,
         humidity: data.list[0].main.humidity,
         icon: `http://openweathermap.org/img/wn/${data.list[0].weather[0].icon}@2x.png`,
-      } as CityWeather;
+        forecast,
+      };
     }
   } catch (e) {
     console.log(e);
