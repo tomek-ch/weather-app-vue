@@ -12,7 +12,6 @@ export default defineComponent({
 
       const addCity = (city: string) => {
         cities.value = [city, ...cities.value];
-        console.log("add", city);
       };
 
       return { cities, addCity };

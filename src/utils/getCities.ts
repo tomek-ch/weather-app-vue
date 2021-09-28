@@ -5,7 +5,6 @@ async function getCities(cities: string[]) {
   const result = (await Promise.all(cities.map(getWeather))).filter(
     (data) => data
   ) as CityWeather[];
-  console.log(result);
   return result;
 }
 
