@@ -1,7 +1,7 @@
 <template>
   <router-link
     :to="`/city/${city.name}`"
-    class="list-group-item list-group-item-action d-flex w-100 justify-content-between mb-3"
+    class="list-group-item list-group-item-action d-flex justify-content-between mb-3 align-items-center"
   >
     <div>
       <h5 class="mb-1">{{ city.name }}</h5>
