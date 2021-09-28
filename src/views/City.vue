@@ -9,9 +9,9 @@
       <img :src="city.icon" />
     </div>
     <h3 class="mb-5">Temperature</h3>
-    <Chart :data="tempData" unit="°C" />
+    <Chart :data="tempData" unit="°C" color="#fd7e14" />
     <h3 class="my-5">Humidity</h3>
-    <Chart :data="humidityData" unit="%" />
+    <Chart :data="humidityData" unit="%" color="#007bff" />
   </div>
 </template>
 

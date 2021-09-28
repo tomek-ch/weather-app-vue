@@ -10,7 +10,7 @@
         v-for="({ value }, idx) in data"
         :key="`bar-${idx}`"
         class="bar"
-        :style="`height: ${(value / max) * 100}%`"
+        :style="`height: ${(value / max) * 100}%; background-color: ${color}`"
       />
     </div>
     <div class="row x-labels">
