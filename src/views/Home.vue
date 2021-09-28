@@ -6,11 +6,8 @@
         Add city
       </button>
     </form>
-    <div v-for="city in weatherData" :key="city">
-      <router-link :to="`/city/${city.name}`">{{ city.name }}</router-link>
-      <div>{{ city.temperature }}°C</div>
-      <div>Humidity: {{ city.humidity }}%</div>
-      <img :src="city.icon" />
+    <div v-for="city in weatherData" :key="city" class="list-group">
+      <CityItem :city="city" />
     </div>
   </div>
 </template>
@@ -18,6 +15,7 @@
 <script lang="ts">
 import { defineComponent, ref, PropType } from "vue";
 import CityWeather from "@/types/CityWeather";
+import CityItem from "@/components/CityItem.vue";
 
 export default defineComponent({
   name: "Home",
@@ -28,6 +26,7 @@ export default defineComponent({
       required: true,
     },
   },
+  components: { CityItem },
   emits: ["add-city"],
   setup(_props, context) {
     const input = ref("");
