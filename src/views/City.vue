@@ -1,9 +1,13 @@
 <template>
   <div v-if="city">
-    <h1>{{ city.name }}</h1>
-    <div>{{ city.temperature }}°C</div>
-    <div>Humidity: {{ city.humidity }}%</div>
-    <img :src="city.icon" />
+    <div class="d-flex justify-content-between mb-5">
+      <div>
+        <h1>{{ city.name }}</h1>
+        <div>{{ city.temperature }}°C</div>
+        <div>Humidity: {{ city.humidity }}%</div>
+      </div>
+      <img :src="city.icon" />
+    </div>
     <Chart :data="chartData" />
   </div>
 </template>
