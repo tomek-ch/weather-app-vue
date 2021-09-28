@@ -6,20 +6,24 @@
         Add city
       </button>
     </form>
-    <div v-for="city in cities" :key="city">
-      {{ city }}
+    <div v-for="city in weatherData" :key="city">
+      <div>{{ city.name }}</div>
+      <div>{{ city.temperature }}°C</div>
+      <div>Humidity: {{ city.humidity }}%</div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, PropType, watchEffect } from "vue";
+import getCities from "@/utils/getCities";
+import CityWeather from "@/types/CityWeather";
 
 export default defineComponent({
   name: "Home",
-  props: { cities: [] },
+  props: { cities: { type: [] as PropType<Array<string>>, required: true } },
   emits: ["add-city"],
-  setup(_props, context) {
+  setup(props, context) {
     const input = ref("");
 
     const handleSubmit = (e: Event) => {
@@ -28,7 +32,11 @@ export default defineComponent({
       input.value = "";
     };
 
-    return { input, handleSubmit };
+    const weatherData = ref<CityWeather[]>([]);
+    watchEffect(
+      async () => (weatherData.value = await getCities(props.cities))
+    );
+    return { input, handleSubmit, weatherData };
   },
 });
 </script>

@@ -8,7 +8,7 @@ import { defineComponent, ref } from "vue";
 export default defineComponent({
   setup() {
     {
-      const cities = ref<string[]>([]);
+      const cities = ref<string[]>(["London"]);
 
       const addCity = (city: string) => {
         cities.value = [city, ...cities.value];
