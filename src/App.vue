@@ -10,6 +10,7 @@
 </template>
 
 <script lang="ts">
+import "./firebase";
 import { defineComponent, ref, watchEffect } from "vue";
 import CityWeather from "./types/CityWeather";
 import getCities from "./utils/getCities";

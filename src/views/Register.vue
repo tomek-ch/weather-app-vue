@@ -1,15 +1,15 @@
 <template>
-  <AuthForm label="Log in" @auth-submit="logIn" />
+  <AuthForm label="Register" @auth-submit="register" />
 </template>
 
 <script lang="ts">
 import AuthForm from "@/components/AuthForm.vue";
-import { logIn } from "@/auth/store";
+import { register } from "@/auth/store";
 
 export default {
   components: { AuthForm },
   setup() {
-    return { logIn };
+    return { register };
   },
 };
 </script>
