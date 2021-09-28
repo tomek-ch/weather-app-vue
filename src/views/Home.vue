@@ -9,6 +9,7 @@
         Add city
       </button>
     </form>
+    <div v-if="error">{{ error }}</div>
     <div v-for="city in weatherData" :key="city" class="list-group">
       <CityItem :city="city" />
     </div>
@@ -35,13 +36,16 @@ export default defineComponent({
     const input = ref("");
     const lowerCaseName = computed(() => input.value.toLowerCase());
 
+    const error = ref("");
+    const handleError = (msg: string) => (error.value = msg);
+
     const handleSubmit = (e: Event) => {
       e.preventDefault();
-      context.emit("add-city", lowerCaseName.value);
+      context.emit("add-city", lowerCaseName.value, handleError);
       input.value = "";
     };
 
-    return { input, handleSubmit, lowerCaseName };
+    return { input, handleSubmit, lowerCaseName, error };
   },
 });
 </script>

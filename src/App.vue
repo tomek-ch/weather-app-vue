@@ -26,15 +26,20 @@ export default defineComponent({
       const weatherData = ref<CityWeather[]>([]);
       getCities(cityNames.value).then((data) => (weatherData.value = data));
 
-      const addCity = async (name: string) => {
+      const addCity = async (
+        name: string,
+        handleError: (msg: string) => void
+      ) => {
         const data = await getCity(name);
         const cityName = data?.name.toLowerCase();
 
         if (data && cityName && !cityNames.value.includes(cityName)) {
           cityNames.value.push(cityName);
           weatherData.value.push(data);
-        } else {
-          console.log("no city");
+        } else if (!data) {
+          handleError("Could not find that city");
+        } else if (cityName) {
+          handleError("City is already on the list");
         }
       };
 
