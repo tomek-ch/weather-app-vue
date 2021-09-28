@@ -1,15 +1,22 @@
 <template>
-  <div class="row bars">
-    <div
-      v-for="({ value }, idx) in data"
-      :key="`bar-${idx}`"
-      class="bar"
-      :style="`height: ${(value / max) * 100}%`"
-    />
-  </div>
-  <div class="row">
-    <div v-for="({ label }, idx) in data" :key="`label-${idx}`" class="label">
-      {{ label }}
+  <div class="chart">
+    <div class="y-labels">
+      <div>{{ max }}</div>
+      <div>{{ (max / 2).toFixed(2) }}</div>
+      <div>0.00</div>
+    </div>
+    <div class="row bars">
+      <div
+        v-for="({ value }, idx) in data"
+        :key="`bar-${idx}`"
+        class="bar"
+        :style="`height: ${(value / max) * 100}%`"
+      />
+    </div>
+    <div class="row x-labels">
+      <div v-for="({ label }, idx) in data" :key="`label-${idx}`" class="label">
+        {{ label }}
+      </div>
     </div>
   </div>
 </template>
@@ -35,18 +42,40 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.chart {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 200px auto;
+  gap: 1em;
+}
+
+.y-labels {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .row {
   display: flex;
   justify-content: space-between;
+  width: 100%;
+  margin: 0;
 }
 
 .bars {
   height: 200px;
   align-items: flex-end;
+  grid-column: 2/3;
 }
 
 .bar {
   background-color: dodgerblue;
   width: 2em;
+}
+
+.x-labels {
+  grid-row: 2/3;
+  grid-column: 2/3;
 }
 </style>
