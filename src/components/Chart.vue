@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from "vue";
+import { defineComponent, PropType } from "vue";
 
 export default defineComponent({
   props: {
@@ -32,10 +32,8 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const max = computed(() =>
-      Math.max(...props.data.map(({ value }) => value))
-    );
-
+    const values = props.data.map(({ value }) => value);
+    const max = Math.max(...values);
     return { max };
   },
 });
