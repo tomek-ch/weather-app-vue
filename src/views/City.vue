@@ -8,7 +8,10 @@
       </div>
       <img :src="city.icon" />
     </div>
-    <Chart :data="chartData" unit="°C" />
+    <h3 class="mb-5">Temperature</h3>
+    <Chart :data="tempData" unit="°C" />
+    <h3 class="my-5">Humidity</h3>
+    <Chart :data="humidityData" unit="%" />
   </div>
 </template>
 
@@ -35,16 +38,21 @@ export default defineComponent({
       }
     });
 
-    const chartData = computed(() =>
-      city.value
-        ? city.value?.forecast.map(({ temperature, dt }) => ({
-            value: Math.round(temperature),
-            label: getTime(dt, city.value?.timezone as number),
-          }))
-        : []
+    const getChartData = (key: "humidity" | "temperature") =>
+      city.value?.forecast.map((item) => ({
+        value: Math.round(item[key]),
+        label: getTime(item.dt, city.value?.timezone as number),
+      }));
+
+    const tempData = computed(() =>
+      city.value ? getChartData("temperature") : []
     );
 
-    return { city, chartData };
+    const humidityData = computed(() =>
+      city.value ? getChartData("humidity") : []
+    );
+
+    return { city, tempData, humidityData };
   },
 });
 </script>
