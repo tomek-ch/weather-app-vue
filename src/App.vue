@@ -1,5 +1,6 @@
 <template>
   <div class="container mx-auto p-4">
+    <Header />
     <router-view
       @add-city="addCity"
       :cityNames="cityNames"
@@ -13,8 +14,10 @@ import { defineComponent, ref, watchEffect } from "vue";
 import CityWeather from "./types/CityWeather";
 import getCities from "./utils/getCities";
 import getCity from "./utils/getCity";
+import Header from "./components/Header.vue";
 
 export default defineComponent({
+  components: { Header },
   setup() {
     {
       const localData = localStorage.getItem("cityNames");
