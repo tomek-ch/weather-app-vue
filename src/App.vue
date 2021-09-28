@@ -1,9 +1,11 @@
 <template>
-  <router-view
-    @add-city="addCity"
-    :cityNames="cityNames"
-    :weatherData="weatherData"
-  />
+  <div class="container mx-auto p-4">
+    <router-view
+      @add-city="addCity"
+      :cityNames="cityNames"
+      :weatherData="weatherData"
+    />
+  </div>
 </template>
 
 <script lang="ts">
@@ -56,9 +58,7 @@ export default defineComponent({
   padding: 0;
 }
 
-body {
+.container {
   max-width: 500px;
-  margin: auto;
-  padding: 2em;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form @submit="handleSubmit">
+    <form @submit="handleSubmit" class="mb-3">
       <input v-model="input" class="form-control" placeholder="London" />
       <button
         class="btn btn-primary"
