@@ -1,18 +1,31 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <form @submit="handleSubmit">
+      <input v-model="input" class="form-control" />
+      <button class="btn btn-primary">Add city</button>
+    </form>
+    <div v-for="city in cities" :key="city">
+      {{ city }}
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+import { defineComponent, ref } from "vue";
 
 export default defineComponent({
-  name: 'Home',
-  components: {
-    HelloWorld,
+  name: "Home",
+  props: { cities: [] },
+  emits: ["add-city"],
+  setup(_props, context) {
+    const input = ref("");
+
+    const handleSubmit = (e: Event) => {
+      e.preventDefault();
+      context.emit("add-city", input.value);
+    };
+
+    return { input, handleSubmit };
   },
 });
 </script>
