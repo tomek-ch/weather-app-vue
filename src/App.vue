@@ -28,9 +28,10 @@ export default defineComponent({
 
       const addCity = async (name: string) => {
         const data = await getCity(name);
+        const cityName = data?.name.toLowerCase();
 
-        if (data) {
-          cityNames.value.push(name);
+        if (data && cityName && !cityNames.value.includes(cityName)) {
+          cityNames.value.push(cityName);
           weatherData.value.push(data);
         } else {
           console.log("no city");

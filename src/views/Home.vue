@@ -2,7 +2,10 @@
   <div>
     <form @submit="handleSubmit">
       <input v-model="input" class="form-control" placeholder="London" />
-      <button class="btn btn-primary" :disabled="cityNames.includes(input)">
+      <button
+        class="btn btn-primary"
+        :disabled="cityNames.includes(lowerCaseName)"
+      >
         Add city
       </button>
     </form>
@@ -13,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, PropType } from "vue";
+import { defineComponent, ref, PropType, computed } from "vue";
 import CityWeather from "@/types/CityWeather";
 import CityItem from "@/components/CityItem.vue";
 
@@ -30,14 +33,15 @@ export default defineComponent({
   emits: ["add-city"],
   setup(_props, context) {
     const input = ref("");
+    const lowerCaseName = computed(() => input.value.toLowerCase());
 
     const handleSubmit = (e: Event) => {
       e.preventDefault();
-      context.emit("add-city", input.value);
+      context.emit("add-city", lowerCaseName.value);
       input.value = "";
     };
 
-    return { input, handleSubmit };
+    return { input, handleSubmit, lowerCaseName };
   },
 });
 </script>
