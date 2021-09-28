@@ -22,7 +22,7 @@ import CityWeather from "@/types/CityWeather";
 
 export default defineComponent({
   name: "Home",
-  props: { cities: { type: [] as PropType<Array<string>>, required: true } },
+  props: { cities: { type: Array as PropType<Array<string>>, required: true } },
   emits: ["add-city"],
   setup(props, context) {
     const input = ref("");
