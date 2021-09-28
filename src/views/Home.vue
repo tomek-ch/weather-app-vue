@@ -40,3 +40,14 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+form {
+  display: flex;
+  gap: 0.5em;
+}
+
+button {
+  white-space: nowrap;
+}
+</style>
