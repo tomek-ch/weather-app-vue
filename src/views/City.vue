@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import getCity from "@/utils/getCity";
-import { defineComponent, ref, watch, watchEffect } from "vue";
+import { defineComponent, ref, watchEffect } from "vue";
 import { useRoute } from "vue-router";
 
 export default defineComponent({
@@ -18,7 +18,9 @@ export default defineComponent({
     const city = ref();
 
     watchEffect(async () => {
-      city.value = await getCity(route.params.name.toString());
+      if (route.params.name) {
+        city.value = await getCity(route.params.name as string);
+      }
     });
 
     return { city };

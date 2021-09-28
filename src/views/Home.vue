@@ -7,7 +7,7 @@
       </button>
     </form>
     <div v-for="city in weatherData" :key="city">
-      <div>{{ city.name }}</div>
+      <router-link :to="`/city/${city.name}`">{{ city.name }}</router-link>
       <div>{{ city.temperature }}°C</div>
       <div>Humidity: {{ city.humidity }}%</div>
       <img :src="city.icon" />
