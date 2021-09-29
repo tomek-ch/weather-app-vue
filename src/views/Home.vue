@@ -41,6 +41,7 @@ defineProps({
     required: true,
   },
 });
+defineEmits(["add-city"]);
 
 const input = ref("");
 const error = ref("");
