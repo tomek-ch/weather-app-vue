@@ -2,11 +2,11 @@
   <form @submit.prevent="$emit('auth-submit', email, password, handleError)">
     <label>
       Email
-      <input v-model="email" class="form-control" />
+      <input v-model="email" class="form-control mt-1" />
     </label>
     <label>
       Password
-      <input v-model="password" class="form-control" type="password" />
+      <input v-model="password" class="form-control mt-1" type="password" />
     </label>
     <button
       class="btn btn-primary"
@@ -15,7 +15,7 @@
       {{ label }}
     </button>
   </form>
-  <Alert :msg="error" variant="danger" />
+  <Alert :msg="error" variant="danger" class="mt-3" />
 </template>
 
 <script setup lang="ts">
