@@ -1,10 +1,6 @@
 <template>
   <div class="container mx-auto p-4">
-    <div class="d-flex justify-content-center" v-if="expectSignIn && !user">
-      <div class="spinner-border mt-5 " role="status">
-        <span class="sr-only">Loading...</span>
-      </div>
-    </div>
+    <Spinner v-if="expectSignIn && !user" />
     <template v-else>
       <Header />
       <router-view
@@ -26,6 +22,7 @@ import { getCityByName } from "./utils/getCity";
 import Header from "./components/Header.vue";
 import { expectSignIn, user } from "./auth/store";
 import { addUserCity, deleteUserCity, getUserCities } from "./db";
+import Spinner from "./components/Spinner.vue";
 
 const cityList = ref<number[]>([]);
 const weatherData = ref<CityWeather[]>([]);
