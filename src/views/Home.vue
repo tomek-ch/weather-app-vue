@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, PropType, computed } from "vue";
+import { ref, PropType } from "vue";
 import CityWeather from "@/types/CityWeather";
 import CityItem from "@/components/CityItem.vue";
 import usePrivateRoute from "@/composables/usePrivateRoute";
