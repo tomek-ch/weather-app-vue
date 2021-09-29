@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form @submit="handleSubmit" class="mb-3">
+    <form @submit.prevent="handleSubmit" class="mb-3">
       <input v-model="input" class="form-control" placeholder="London" />
       <button
         class="btn btn-primary"
@@ -42,8 +42,7 @@ export default defineComponent({
     const error = ref("");
     const handleError = (msg: string) => (error.value = msg);
 
-    const handleSubmit = (e: Event) => {
-      e.preventDefault();
+    const handleSubmit = () => {
       context.emit("add-city", lowerCaseName.value, handleError);
       input.value = "";
     };

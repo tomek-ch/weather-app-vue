@@ -1,5 +1,5 @@
 <template>
-  <form @submit="handleSubmit">
+  <form @submit.prevent="$emit('auth-submit', email, password)">
     <label>
       Email
       <input v-model="email" class="form-control" type="email" />
@@ -20,16 +20,10 @@ export default defineComponent({
   props: {
     label: String,
   },
-  setup(_props, context) {
+  setup() {
     const email = ref("");
     const password = ref("");
-
-    const handleSubmit = async (e: Event) => {
-      e.preventDefault();
-      context.emit("auth-submit", email.value, password.value);
-    };
-
-    return { email, password, handleSubmit };
+    return { email, password };
   },
 });
 </script>
