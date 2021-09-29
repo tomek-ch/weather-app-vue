@@ -9,50 +9,38 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import "./firebase";
-import { defineComponent, ref, watchEffect } from "vue";
+import { ref, watchEffect } from "vue";
 import CityWeather from "./types/CityWeather";
 import getCities from "./utils/getCities";
 import getCity from "./utils/getCity";
 import Header from "./components/Header.vue";
 
-export default defineComponent({
-  components: { Header },
-  setup() {
-    {
-      const localData = localStorage.getItem("cityNames");
-      const cityNames = ref<string[]>(["London"]);
-      cityNames.value = localData ? JSON.parse(localData) : [];
+const localData = localStorage.getItem("cityNames");
+const cityNames = ref<string[]>(["London"]);
+cityNames.value = localData ? JSON.parse(localData) : [];
 
-      watchEffect(() => {
-        localStorage.setItem("cityNames", JSON.stringify(cityNames.value));
-      });
-
-      const weatherData = ref<CityWeather[]>([]);
-      getCities(cityNames.value).then((data) => (weatherData.value = data));
-
-      const addCity = async (
-        name: string,
-        handleError: (msg: string) => void
-      ) => {
-        const data = await getCity(name);
-        const cityName = data?.name.toLowerCase();
-
-        if (data && cityName && !cityNames.value.includes(cityName)) {
-          cityNames.value.push(cityName);
-          weatherData.value.push(data);
-        } else if (!data) {
-          handleError("Could not find that city");
-        } else if (cityName) {
-          handleError("City is already on the list");
-        }
-      };
-
-      return { weatherData, addCity, cityNames };
-    }
-  },
+watchEffect(() => {
+  localStorage.setItem("cityNames", JSON.stringify(cityNames.value));
 });
+
+const weatherData = ref<CityWeather[]>([]);
+getCities(cityNames.value).then((data) => (weatherData.value = data));
+
+const addCity = async (name: string, handleError: (msg: string) => void) => {
+  const data = await getCity(name);
+  const cityName = data?.name.toLowerCase();
+
+  if (data && cityName && !cityNames.value.includes(cityName)) {
+    cityNames.value.push(cityName);
+    weatherData.value.push(data);
+  } else if (!data) {
+    handleError("Could not find that city");
+  } else if (cityName) {
+    handleError("City is already on the list");
+  }
+};
 </script>
 
 <style>

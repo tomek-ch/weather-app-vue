@@ -18,15 +18,8 @@
   </header>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import { user, logOut } from "@/auth/store";
-
-export default defineComponent({
-  setup() {
-    return { user, logOut };
-  },
-});
 </script>
 
 <style scoped>

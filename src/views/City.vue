@@ -15,50 +15,42 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import CityWeather from "@/types/CityWeather";
 import getCity from "@/utils/getCity";
-import { computed, defineComponent, ref, watchEffect } from "vue";
+import { computed, ref, watchEffect } from "vue";
 import { useRoute } from "vue-router";
 import Chart from "@/components/Chart.vue";
 import getTime from "@/utils/getTime";
 
-export default defineComponent({
-  components: { Chart },
-  setup() {
-    const route = useRoute();
-    const city = ref<CityWeather | null>(null);
+const route = useRoute();
+const city = ref<CityWeather | null>(null);
 
-    watchEffect(async () => {
-      if (route.params.name) {
-        const data = await getCity(route.params.name as string);
-        if (data) {
-          city.value = data;
-        }
-      }
-    });
-
-    enum Key {
-      hum = "humidity",
-      temp = "temperature",
+watchEffect(async () => {
+  if (route.params.name) {
+    const data = await getCity(route.params.name as string);
+    if (data) {
+      city.value = data;
     }
-
-    const getChartData = (key: Key) =>
-      computed(
-        () =>
-          city.value?.forecast.map((item) => ({
-            value: Math.round(item[key]),
-            label: getTime(item.timestamp, city.value?.timezone as number),
-          })) || []
-      );
-
-    return {
-      city,
-      tempData: getChartData(Key.temp),
-      humidityData: getChartData(Key.hum),
-    };
-  },
+  }
 });
+
+enum Key {
+  hum = "humidity",
+  temp = "temperature",
+}
+
+const getChartData = (key: Key) =>
+  computed(
+    () =>
+      city.value?.forecast.map((item) => ({
+        value: Math.round(item[key]),
+        label: getTime(item.timestamp, city.value?.timezone as number),
+      })) || []
+  );
+
+const tempData = getChartData(Key.temp);
+const humidityData = getChartData(Key.hum);
 </script>
 
 <style scoped>

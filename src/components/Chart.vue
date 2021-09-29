@@ -21,24 +21,20 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from "vue";
+<script setup lang="ts">
+import { PropType } from "vue";
 
-export default defineComponent({
-  props: {
-    data: {
-      type: Array as PropType<{ value: number; label: string }[]>,
-      required: true,
-    },
-    unit: String,
-    color: String,
+const props = defineProps({
+  data: {
+    type: Array as PropType<{ value: number; label: string }[]>,
+    required: true,
   },
-  setup(props) {
-    const values = props.data.map(({ value }) => value);
-    const max = Math.max(...values);
-    return { max };
-  },
+  unit: String,
+  color: String,
 });
+
+const values = props.data.map(({ value }) => value);
+const max = Math.max(...values);
 </script>
 
 <style scoped>

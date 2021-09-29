@@ -12,12 +12,10 @@
   </router-link>
 </template>
 
-<script lang="ts">
-export default {
-  props: {
-    city: { type: Object },
-  },
-};
+<script setup lang="ts">
+defineProps({
+  city: { type: Object },
+});
 </script>
 
 <style scoped>

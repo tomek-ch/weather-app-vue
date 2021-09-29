@@ -12,20 +12,16 @@
   </form>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from "vue";
+<script setup lang="ts">
+import { ref } from "vue";
 
-export default defineComponent({
-  emits: ["auth-submit"],
-  props: {
-    label: String,
-  },
-  setup() {
-    const email = ref("");
-    const password = ref("");
-    return { email, password };
-  },
+defineProps({
+  label: String,
 });
+defineEmits(["auth-submit"]);
+
+const email = ref("");
+const password = ref("");
 </script>
 
 <style scoped>
