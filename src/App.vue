@@ -24,22 +24,31 @@ import getCities from "./utils/getCities";
 import { getCityByName } from "./utils/getCity";
 import Header from "./components/Header.vue";
 import { expectSignIn, user } from "./auth/store";
+import { addUserCity, getUserCities } from "./db";
 
-const localData = localStorage.getItem("cityList");
 const cityList = ref<number[]>([]);
-cityList.value = localData ? JSON.parse(localData) : [];
+const weatherData = ref<CityWeather[]>([]);
 
 watchEffect(() => {
-  localStorage.setItem("cityList", JSON.stringify(cityList.value));
+  if (user.value) {
+    getUserCities(user.value.uid)
+      .then((userCities) => (cityList.value = userCities))
+      .then(async () => (weatherData.value = await getCities(cityList.value)))
+      .catch(console.log);
+  } else {
+    cityList.value = [];
+    weatherData.value = [];
+  }
 });
-
-const weatherData = ref<CityWeather[]>([]);
-getCities(cityList.value).then((data) => (weatherData.value = data));
 
 const addCity = async (name: string, handleError: (msg: string) => void) => {
   const data = await getCityByName(name);
-
-  if (data && !weatherData.value.find(({ id }) => data.id === id)) {
+  if (
+    user.value &&
+    data &&
+    !weatherData.value.find(({ id }) => data.id === id)
+  ) {
+    addUserCity(user.value.uid, data.id);
     cityList.value.push(data.id);
     weatherData.value.push(data);
   } else if (!data) {
