@@ -43,4 +43,8 @@ a {
   flex-grow: 1;
   text-decoration: none;
 }
+
+h4 {
+  word-break: break-word;
+}
 </style>
