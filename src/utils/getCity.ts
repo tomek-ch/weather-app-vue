@@ -14,7 +14,7 @@ async function getWeather(location: string) {
       const forecast = data.list.slice(0, 6).map((item) => ({
         temperature: item.main.temp,
         humidity: item.main.humidity,
-        dt: item.dt,
+        timestamp: item.dt,
       }));
 
       return {

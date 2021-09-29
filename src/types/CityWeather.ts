@@ -1,7 +1,7 @@
 interface Forecast {
   humidity: number;
   temperature: number;
-  dt: number;
+  timestamp: number;
 }
 
 interface CityWeather {

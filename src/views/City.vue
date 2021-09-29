@@ -43,7 +43,7 @@ export default defineComponent({
         () =>
           city.value?.forecast.map((item) => ({
             value: Math.round(item[key]),
-            label: getTime(item.dt, city.value?.timezone as number),
+            label: getTime(item.timestamp, city.value?.timezone as number),
           })) || []
       );
 
