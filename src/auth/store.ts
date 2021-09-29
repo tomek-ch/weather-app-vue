@@ -12,11 +12,7 @@ export const user = ref<User | null>(null);
 const auth = getAuth();
 
 onAuthStateChanged(auth, (userData) => {
-  if (userData) {
-    user.value = userData;
-  } else {
-    user.value = null;
-  }
+  user.value = userData;
 });
 
 export const register = (email: string, password: string) => {
