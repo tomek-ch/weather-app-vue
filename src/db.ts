@@ -1,6 +1,8 @@
 import {
+  arrayRemove,
   arrayUnion,
   doc,
+  FieldValue,
   getDoc,
   getFirestore,
   setDoc,
@@ -22,9 +24,15 @@ export const getUserCities = async (uid: string) => {
   return [];
 };
 
-export const addUserCity = async (uid: string, cityId: number) => {
+const updateCities = (cb: (...elements: unknown[]) => FieldValue) => async (
+  uid: string,
+  cityId: number
+) => {
   const userRef = doc(db, "users", uid);
   await updateDoc(userRef, {
-    cities: arrayUnion(cityId),
+    cities: cb(cityId),
   });
 };
+
+export const addUserCity = updateCities(arrayUnion);
+export const deleteUserCity = updateCities(arrayRemove);

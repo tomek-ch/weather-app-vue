@@ -9,6 +9,7 @@
       <Header />
       <router-view
         @add-city="addCity"
+        @delete-city="deleteCity"
         :cityList="cityList"
         :weatherData="weatherData"
       />
@@ -24,7 +25,7 @@ import getCities from "./utils/getCities";
 import { getCityByName } from "./utils/getCity";
 import Header from "./components/Header.vue";
 import { expectSignIn, user } from "./auth/store";
-import { addUserCity, getUserCities } from "./db";
+import { addUserCity, deleteUserCity, getUserCities } from "./db";
 
 const cityList = ref<number[]>([]);
 const weatherData = ref<CityWeather[]>([]);
@@ -55,6 +56,14 @@ const addCity = async (name: string, handleError: (msg: string) => void) => {
     handleError("Could not find that city");
   } else {
     handleError("City is already on the list");
+  }
+};
+
+const deleteCity = (cityId: number) => {
+  if (user.value) {
+    deleteUserCity(user.value.uid, cityId);
+    weatherData.value = weatherData.value.filter(({ id }) => id !== cityId);
+    cityList.value = cityList.value.filter((id) => id !== cityId);
   }
 };
 </script>

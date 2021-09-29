@@ -21,7 +21,7 @@
     </form>
     <Alert :msg="error" variant="warning" />
     <div v-for="city in weatherData" :key="city.id" class="list-group">
-      <CityItem :city="city" />
+      <CityItem :city="city" @delete-city="$emit('delete-city', $event)" />
     </div>
   </div>
 </template>
@@ -41,7 +41,7 @@ defineProps({
     required: true,
   },
 });
-defineEmits(["add-city"]);
+defineEmits(["add-city", "delete-city"]);
 
 const input = ref("");
 const { error, handleError } = useError();
