@@ -9,10 +9,16 @@ import {
 import { ref } from "vue";
 
 export const user = ref<User | null>(null);
+export const expectSignIn = ref<boolean>(
+  !!localStorage.getItem("expectSignIn")
+);
 const auth = getAuth();
 
 onAuthStateChanged(auth, (userData) => {
   user.value = userData;
+  const isLoggedIn = !!userData;
+  expectSignIn.value = isLoggedIn;
+  localStorage.setItem("expectSignIn", JSON.stringify(isLoggedIn));
 });
 
 export const register = (email: string, password: string) => {
