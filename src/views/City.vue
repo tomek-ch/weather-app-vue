@@ -38,7 +38,12 @@ export default defineComponent({
       }
     });
 
-    const getChartData = (key: "humidity" | "temperature") =>
+    enum Key {
+      hum = "humidity",
+      temp = "temperature",
+    }
+
+    const getChartData = (key: Key) =>
       computed(
         () =>
           city.value?.forecast.map((item) => ({
@@ -49,8 +54,8 @@ export default defineComponent({
 
     return {
       city,
-      tempData: getChartData("temperature"),
-      humidityData: getChartData("humidity"),
+      tempData: getChartData(Key.temp),
+      humidityData: getChartData(Key.hum),
     };
   },
 });
