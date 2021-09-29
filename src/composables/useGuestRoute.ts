@@ -2,7 +2,7 @@ import { user } from "@/auth/store";
 import { watchEffect } from "vue";
 import { useRouter } from "vue-router";
 
-const usePrivateRoute = () => {
+const useGuestRoute = () => {
   const router = useRouter();
   watchEffect(() => {
     if (user.value) {
@@ -11,4 +11,4 @@ const usePrivateRoute = () => {
   });
 };
 
-export default usePrivateRoute;
+export default useGuestRoute;
