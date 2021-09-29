@@ -1,11 +1,11 @@
 <template>
-  <header class="d-flex justify-content-between mb-4">
+  <header class="d-flex justify-content-between mb-4 align-items-center">
     <router-link to="/"><h1>Weather app</h1></router-link>
     <div>
-      <div v-if="user">
+      <div v-if="user" class="d-flex align-items-baseline">
         {{ user.email }}
-        <button class="btn btn-secondary ml-2" @click="logOut">
-          Sign out
+        <button class="btn close ml-3" @click="logOut">
+          <LogOut />
         </button>
       </div>
       <div v-else>
@@ -20,6 +20,7 @@
 
 <script setup lang="ts">
 import { user, logOut } from "@/auth/store";
+import LogOut from "@/icons/LogOut.vue";
 </script>
 
 <style scoped>
