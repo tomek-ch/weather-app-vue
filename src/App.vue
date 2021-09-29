@@ -1,11 +1,16 @@
 <template>
   <div class="container mx-auto p-4">
-    <Header />
-    <router-view
-      @add-city="addCity"
-      :cityList="cityList"
-      :weatherData="weatherData"
-    />
+    <div v-if="expectSignIn && !user">
+      Loading...
+    </div>
+    <template v-else>
+      <Header />
+      <router-view
+        @add-city="addCity"
+        :cityList="cityList"
+        :weatherData="weatherData"
+      />
+    </template>
   </div>
 </template>
 
@@ -16,6 +21,7 @@ import CityWeather from "./types/CityWeather";
 import getCities from "./utils/getCities";
 import { getCityByName } from "./utils/getCity";
 import Header from "./components/Header.vue";
+import { expectSignIn, user } from "./auth/store";
 
 const localData = localStorage.getItem("cityList");
 const cityList = ref<number[]>([]);
