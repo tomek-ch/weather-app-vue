@@ -6,7 +6,9 @@
         <div>{{ city.temperature }}°C</div>
         <div>Humidity: {{ city.humidity }}%</div>
       </div>
-      <img :src="city.icon" />
+      <div class="img-wrapper">
+        <img :src="city.icon" />
+      </div>
     </div>
     <h3 class="mb-5">Temperature</h3>
     <Chart :data="tempData" unit="°C" color="#fd7e14" />
