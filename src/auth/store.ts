@@ -4,6 +4,7 @@ import {
   User,
   signInWithEmailAndPassword,
   onAuthStateChanged,
+  signOut,
 } from "firebase/auth";
 import { ref } from "vue";
 
@@ -24,4 +25,8 @@ export const register = (email: string, password: string) => {
 
 export const logIn = (email: string, password: string) => {
   signInWithEmailAndPassword(auth, email, password);
+};
+
+export const logOut = () => {
+  signOut(auth);
 };
