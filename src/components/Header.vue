@@ -1,7 +1,15 @@
 <template>
   <header class="d-flex justify-content-between">
     <router-link to="/"><h1 class="mb-3">Weather app</h1></router-link>
-    <div v-if="user">{{ user.email }} aa</div>
+    <div>
+      <div v-if="user">{{ user.email }}</div>
+      <div v-else>
+        <router-link to="/log-in">Log in</router-link>
+        <router-link to="/register" class="btn btn-primary ml-3">
+          Register
+        </router-link>
+      </div>
+    </div>
   </header>
 </template>
 
