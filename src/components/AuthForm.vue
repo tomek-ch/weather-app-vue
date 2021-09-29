@@ -15,14 +15,13 @@
       {{ label }}
     </button>
   </form>
-  <div v-if="error" class="alert alert-danger mt-3" role="alert">
-    {{ error }}
-  </div>
+  <Alert :msg="error" variant="danger" />
 </template>
 
 <script setup lang="ts">
 import useError from "@/composables/useError";
 import { ref } from "vue";
+import Alert from "./Alert.vue";
 
 defineProps({
   label: String,

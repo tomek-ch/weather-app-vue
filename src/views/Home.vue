@@ -19,9 +19,7 @@
         Add city
       </button>
     </form>
-    <div v-if="error" class="alert alert-warning" role="alert">
-      {{ error }}
-    </div>
+    <Alert :msg="error" variant="warning" />
     <div v-for="city in weatherData" :key="city.id" class="list-group">
       <CityItem :city="city" />
     </div>
@@ -34,6 +32,7 @@ import CityWeather from "@/types/CityWeather";
 import CityItem from "@/components/CityItem.vue";
 import usePrivateRoute from "@/composables/usePrivateRoute";
 import useError from "@/composables/useError";
+import Alert from "@/components/Alert.vue";
 
 defineProps({
   cityList: { type: Array as PropType<Array<number>>, required: true },
