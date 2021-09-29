@@ -10,7 +10,11 @@
       <input v-model="input" class="form-control" placeholder="London" />
       <button
         class="btn btn-primary"
-        :disabled="cityNames.includes(lowerCaseName)"
+        :disabled="
+          !!weatherData.find(
+            ({ name }) => name.toLocaleLowerCase() === input.toLocaleLowerCase()
+          )
+        "
       >
         Add city
       </button>
@@ -18,7 +22,7 @@
     <div v-if="error" class="alert alert-warning" role="alert">
       {{ error }}
     </div>
-    <div v-for="city in weatherData" :key="city.name" class="list-group">
+    <div v-for="city in weatherData" :key="city.id" class="list-group">
       <CityItem :city="city" />
     </div>
   </div>
@@ -31,7 +35,7 @@ import CityItem from "@/components/CityItem.vue";
 import usePrivateRoute from "@/composables/usePrivateRoute";
 
 defineProps({
-  cityNames: { type: Array as PropType<Array<string>>, required: true },
+  cityList: { type: Array as PropType<Array<number>>, required: true },
   weatherData: {
     type: Array as PropType<Array<CityWeather>>,
     required: true,
@@ -39,8 +43,6 @@ defineProps({
 });
 
 const input = ref("");
-const lowerCaseName = computed(() => input.value.toLowerCase());
-
 const error = ref("");
 const handleError = (msg: string) => (error.value = msg);
 

@@ -5,6 +5,7 @@ interface Forecast {
 }
 
 interface CityWeather {
+  id: number;
   name: string;
   timezone: number;
   icon: string;

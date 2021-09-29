@@ -1,11 +1,10 @@
 import CityWeather from "@/types/CityWeather";
-import getWeather from "./getCity";
+import { getCityById } from "./getCity";
 
-async function getCities(cities: string[]) {
-  const result = (await Promise.all(cities.map(getWeather))).filter(
+async function getCities(cities: number[]) {
+  return (await Promise.all(cities.map(getCityById))).filter(
     (data) => data
   ) as CityWeather[];
-  return result;
 }
 
 export default getCities;

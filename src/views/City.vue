@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import CityWeather from "@/types/CityWeather";
-import getCity from "@/utils/getCity";
+import { getCityByName } from "@/utils/getCity";
 import { computed, ref, watchEffect } from "vue";
 import { useRoute } from "vue-router";
 import Chart from "@/components/Chart.vue";
@@ -28,7 +28,7 @@ const city = ref<CityWeather | null>(null);
 
 watchEffect(async () => {
   if (route.params.name) {
-    const data = await getCity(route.params.name as string);
+    const data = await getCityByName(route.params.name as string);
     if (data) {
       city.value = data;
     }

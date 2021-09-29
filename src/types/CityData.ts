@@ -1,5 +1,6 @@
 interface CityData {
   city: {
+    id: number;
     name: string;
     timezone: number;
   };

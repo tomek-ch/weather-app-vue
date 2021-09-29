@@ -3,7 +3,7 @@
     <Header />
     <router-view
       @add-city="addCity"
-      :cityNames="cityNames"
+      :cityList="cityList"
       :weatherData="weatherData"
     />
   </div>
@@ -14,30 +14,29 @@ import "./firebase";
 import { ref, watchEffect } from "vue";
 import CityWeather from "./types/CityWeather";
 import getCities from "./utils/getCities";
-import getCity from "./utils/getCity";
+import { getCityByName } from "./utils/getCity";
 import Header from "./components/Header.vue";
 
-const localData = localStorage.getItem("cityNames");
-const cityNames = ref<string[]>(["London"]);
-cityNames.value = localData ? JSON.parse(localData) : [];
+const localData = localStorage.getItem("cityList");
+const cityList = ref<number[]>([]);
+cityList.value = localData ? JSON.parse(localData) : [];
 
 watchEffect(() => {
-  localStorage.setItem("cityNames", JSON.stringify(cityNames.value));
+  localStorage.setItem("cityList", JSON.stringify(cityList.value));
 });
 
 const weatherData = ref<CityWeather[]>([]);
-getCities(cityNames.value).then((data) => (weatherData.value = data));
+getCities(cityList.value).then((data) => (weatherData.value = data));
 
 const addCity = async (name: string, handleError: (msg: string) => void) => {
-  const data = await getCity(name);
-  const cityName = data?.name.toLowerCase();
+  const data = await getCityByName(name);
 
-  if (data && cityName && !cityNames.value.includes(cityName)) {
-    cityNames.value.push(cityName);
+  if (data && !weatherData.value.find(({ id }) => data.id === id)) {
+    cityList.value.push(data.id);
     weatherData.value.push(data);
   } else if (!data) {
     handleError("Could not find that city");
-  } else if (cityName) {
+  } else {
     handleError("City is already on the list");
   }
 };

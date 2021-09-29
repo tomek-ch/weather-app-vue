@@ -4,7 +4,7 @@ async function getWeather(location: string) {
   const url = "https://api.openweathermap.org/data/2.5/forecast";
   const key = "77507ca00606a30af83452d6251687da";
   const units = "metric";
-  const endpoint = `${url}?q=${location}&appid=${key}&units=${units}`;
+  const endpoint = `${url}?${location}&appid=${key}&units=${units}`;
 
   try {
     const response = await fetch(endpoint);
@@ -18,6 +18,7 @@ async function getWeather(location: string) {
       }));
 
       return {
+        id: data.city.id,
         name: data.city.name,
         timezone: data.city.timezone,
         temperature: data.list[0].main.temp,
@@ -31,4 +32,10 @@ async function getWeather(location: string) {
   }
 }
 
-export default getWeather;
+export const getCityByName = (name: string) => {
+  return getWeather(`q=${name}`);
+};
+
+export const getCityById = (id: number) => {
+  return getWeather(`id=${id}`);
+};
