@@ -22,6 +22,7 @@
 import { defineComponent, ref, PropType, computed } from "vue";
 import CityWeather from "@/types/CityWeather";
 import CityItem from "@/components/CityItem.vue";
+import usePrivateRoute from "@/composables/usePrivateRoute";
 
 export default defineComponent({
   name: "Home",
@@ -47,6 +48,7 @@ export default defineComponent({
       input.value = "";
     };
 
+    usePrivateRoute();
     return { input, handleSubmit, lowerCaseName, error };
   },
 });

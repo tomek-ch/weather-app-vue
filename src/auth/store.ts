@@ -20,22 +20,8 @@ onAuthStateChanged(auth, (userData) => {
 
 export const register = (email: string, password: string) => {
   createUserWithEmailAndPassword(auth, email, password);
-  // .then((userCredential) => {
-  //   user.value = userCredential.user;
-  // })
-  // .catch((error) => {
-  //   const errorCode = error.code;
-  //   const errorMessage = error.message;
-  // });
 };
 
 export const logIn = (email: string, password: string) => {
   signInWithEmailAndPassword(auth, email, password);
-  // .then((userCredential) => {
-  //   user.value = userCredential.user;
-  // })
-  // .catch((error) => {
-  //   const errorCode = error.code;
-  //   const errorMessage = error.message;
-  // });
 };
