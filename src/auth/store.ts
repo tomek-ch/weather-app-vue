@@ -5,6 +5,8 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
+  Auth,
+  UserCredential,
 } from "firebase/auth";
 import { ref } from "vue";
 
@@ -21,14 +23,23 @@ onAuthStateChanged(auth, (userData) => {
   localStorage.setItem("expectSignIn", JSON.stringify(isLoggedIn));
 });
 
-export const register = (email: string, password: string) => {
-  createUserWithEmailAndPassword(auth, email, password);
+const errors: Record<string, string> = {
+  "auth/invalid-email": "The email seems to be incorrect",
+  "auth/email-already-in-use": "This email is already in use",
+  "auth/user-not-found": "There doesn't seem to be a user with this email",
+  "auth/wrong-password": "Incorrect password",
 };
 
-export const logIn = (email: string, password: string) => {
-  signInWithEmailAndPassword(auth, email, password);
+const authenticate = (
+  cb: (auth: Auth, email: string, password: string) => Promise<UserCredential>
+) => (email: string, password: string, handleError: (msg: string) => void) => {
+  cb(auth, email, password).catch(({ code }) =>
+    handleError(errors[code] || code)
+  );
 };
 
+export const register = authenticate(createUserWithEmailAndPassword);
+export const logIn = authenticate(signInWithEmailAndPassword);
 export const logOut = () => {
   signOut(auth);
 };
