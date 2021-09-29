@@ -33,6 +33,7 @@ import { ref, PropType } from "vue";
 import CityWeather from "@/types/CityWeather";
 import CityItem from "@/components/CityItem.vue";
 import usePrivateRoute from "@/composables/usePrivateRoute";
+import useError from "@/composables/useError";
 
 defineProps({
   cityList: { type: Array as PropType<Array<number>>, required: true },
@@ -44,9 +45,7 @@ defineProps({
 defineEmits(["add-city"]);
 
 const input = ref("");
-const error = ref("");
-const handleError = (msg: string) => (error.value = msg);
-
+const { error, handleError } = useError();
 usePrivateRoute();
 </script>
 
