@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 defineProps({
-  city: { type: Object },
+  city: { type: Object, required: true },
 });
 </script>
 
