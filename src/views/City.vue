@@ -39,20 +39,19 @@ export default defineComponent({
     });
 
     const getChartData = (key: "humidity" | "temperature") =>
-      city.value?.forecast.map((item) => ({
-        value: Math.round(item[key]),
-        label: getTime(item.dt, city.value?.timezone as number),
-      }));
+      computed(
+        () =>
+          city.value?.forecast.map((item) => ({
+            value: Math.round(item[key]),
+            label: getTime(item.dt, city.value?.timezone as number),
+          })) || []
+      );
 
-    const tempData = computed(() =>
-      city.value ? getChartData("temperature") : []
-    );
-
-    const humidityData = computed(() =>
-      city.value ? getChartData("humidity") : []
-    );
-
-    return { city, tempData, humidityData };
+    return {
+      city,
+      tempData: getChartData("temperature"),
+      humidityData: getChartData("humidity"),
+    };
   },
 });
 </script>
