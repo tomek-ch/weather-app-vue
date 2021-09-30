@@ -23,4 +23,10 @@ describe("CityItem.vue", () => {
   it("renders correct city name", () => {
     expect(wrapper.find("h4").text()).toBe(city.name);
   });
+
+  it("links to the correct page", () => {
+    expect(wrapper.findComponent(RouterLinkStub).props().to).toBe(
+      `/city/${city.name}`
+    );
+  });
 });
