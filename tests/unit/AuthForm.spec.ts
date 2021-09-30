@@ -1,4 +1,4 @@
-import { shallowMount } from "@vue/test-utils";
+import { shallowMount, mount } from "@vue/test-utils";
 import AuthForm from "@/components/AuthForm.vue";
 import { nextTick } from "vue";
 
@@ -44,5 +44,25 @@ describe("Alert.vue", () => {
       wrapper.find('input[type="password"]').setValue("123456"),
     ]);
     expect(wrapper.find("button").element.disabled).toBe(false);
+  });
+
+  it("submits correct data", async () => {
+    const wrapper = mount(AuthForm);
+    const email = "test@test.com";
+    const password = "123456";
+
+    await Promise.all([
+      wrapper.find("input").setValue(email),
+      wrapper.find('input[type="password"]').setValue(password),
+    ]);
+
+    await wrapper.find("form").trigger("submit");
+    const event = wrapper.emitted<(string | ((msg: string) => string))[]>()[
+      "auth-submit"
+    ][0];
+
+    expect(event[0]).toBe(email);
+    expect(event[1]).toBe(password);
+    expect(typeof event[2]).toBe("function");
   });
 });
