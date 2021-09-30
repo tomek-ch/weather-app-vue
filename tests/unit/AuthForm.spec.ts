@@ -1,5 +1,6 @@
 import { shallowMount } from "@vue/test-utils";
 import AuthForm from "@/components/AuthForm.vue";
+import { nextTick } from "vue";
 
 describe("Alert.vue", () => {
   it("renders a button with appropriate label", () => {
@@ -18,21 +19,21 @@ describe("Alert.vue", () => {
     expect(wrapper.find("button").element.disabled).toBe(true);
   });
 
-  it("is disabled when the password is too short", () => {
+  it("is disabled when the password is too short", async () => {
     const wrapper = shallowMount(AuthForm, {});
-
-    wrapper.find("input").setValue("test@test.com");
-    wrapper.find('input[type="password"]').setValue("12345");
-
+    await Promise.all([
+      wrapper.find("input").setValue("test@test.com"),
+      wrapper.find('input[type="password"]').setValue("12345"),
+    ]);
     expect(wrapper.find("button").element.disabled).toBe(true);
   });
 
-  it("is disabled when the email is incorrect", () => {
+  it("is disabled when the email is incorrect", async () => {
     const wrapper = shallowMount(AuthForm, {});
-
-    wrapper.find("input").setValue("test");
-    wrapper.find('input[type="password"]').setValue("123456");
-
+    await Promise.all([
+      wrapper.find("input").setValue("test"),
+      wrapper.find('input[type="password"]').setValue("123456"),
+    ]);
     expect(wrapper.find("button").element.disabled).toBe(true);
   });
 });
