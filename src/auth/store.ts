@@ -28,6 +28,7 @@ const errors: Record<string, string> = {
   "auth/email-already-in-use": "This email is already in use",
   "auth/user-not-found": "There doesn't seem to be a user with this email",
   "auth/wrong-password": "Incorrect password",
+  "auth/network-request-failed": "There was a network error",
 };
 
 const authenticate = (
