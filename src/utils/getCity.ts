@@ -11,11 +11,13 @@ async function getWeather(location: string) {
     if (response.ok) {
       const data: CityData = await response.json();
 
-      const forecast = data.list.slice(0, 6).map((item) => ({
-        temperature: item.main.temp,
-        humidity: item.main.humidity,
-        timestamp: item.dt,
-      }));
+      const forecast = data.list
+        .slice(0, 6)
+        .map(({ dt, main: { temp, humidity } }) => ({
+          temperature: temp,
+          humidity,
+          timestamp: dt,
+        }));
 
       return {
         id: data.city.id,
