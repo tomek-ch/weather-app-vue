@@ -36,4 +36,13 @@ describe("Alert.vue", () => {
     ]);
     expect(wrapper.find("button").element.disabled).toBe(true);
   });
+
+  it("is enabled when the data is correct", async () => {
+    const wrapper = shallowMount(AuthForm, {});
+    await Promise.all([
+      wrapper.find("input").setValue("test@test.com"),
+      wrapper.find('input[type="password"]').setValue("123456"),
+    ]);
+    expect(wrapper.find("button").element.disabled).toBe(false);
+  });
 });
