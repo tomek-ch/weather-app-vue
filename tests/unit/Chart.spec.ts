@@ -28,4 +28,11 @@ describe("Chart.vue", () => {
   it("renders bars of correct color", () => {
     expect(bars[0].element.style.backgroundColor).toBe(color);
   });
+
+  it("renders correct labels on the x axis", () => {
+    const labels = wrapper.findAll(".label");
+    labels.forEach((label, idx) => {
+      expect(label.text()).toBe(data[idx].label);
+    });
+  });
 });
