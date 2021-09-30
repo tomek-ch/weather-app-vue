@@ -11,4 +11,11 @@ describe("Alert.vue", () => {
     const text = wrapper.find("div").text();
     expect(text).toMatch(msg);
   });
+  it("doesn't render an empty msg", () => {
+    const msg = "";
+    const wrapper = shallowMount(Alert, {
+      props: { msg },
+    });
+    expect(wrapper.find("div").exists()).toBe(false);
+  });
 });
