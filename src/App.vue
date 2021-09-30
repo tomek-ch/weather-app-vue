@@ -67,12 +67,6 @@ const deleteCity = (cityId: number) => {
 </script>
 
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 .container {
   max-width: 500px;
 }
