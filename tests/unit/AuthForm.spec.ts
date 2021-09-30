@@ -26,4 +26,13 @@ describe("Alert.vue", () => {
 
     expect(wrapper.find("button").element.disabled).toBe(true);
   });
+
+  it("is disabled when the email is incorrect", () => {
+    const wrapper = shallowMount(AuthForm, {});
+
+    wrapper.find("input").setValue("test");
+    wrapper.find('input[type="password"]').setValue("123456");
+
+    expect(wrapper.find("button").element.disabled).toBe(true);
+  });
 });
