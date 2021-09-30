@@ -1,19 +1,6 @@
 import CityItem from "@/components/CityItem.vue";
-import { mount, shallowMount } from "@vue/test-utils";
-import { createRouter, createWebHistory } from "vue-router";
-import City from "@/views/City.vue";
-
-const router = createRouter({
-  history: createWebHistory(),
-  routes: [
-    { path: "/", name: "Home", component: City },
-    {
-      path: "/city/:name",
-      name: "City",
-      component: City,
-    },
-  ],
-});
+import { shallowMount } from "@vue/test-utils";
+import { RouterLinkStub } from "@vue/test-utils";
 
 const city = {
   id: 1,
@@ -23,15 +10,17 @@ const city = {
   icon: "src",
 };
 
-describe("CityItem.vue", () => {
-  it("renders correct data", () => {
-    router.isReady().then(() => {
-      const wrapper = shallowMount(City, {
-        props: { city },
-        global: { plugins: [router] },
-      });
+const wrapper = shallowMount(CityItem, {
+  props: { city },
+  global: {
+    stubs: {
+      RouterLink: RouterLinkStub,
+    },
+  },
+});
 
-      expect(wrapper.find("h4").text()).toBe(city.name);
-    });
+describe("CityItem.vue", () => {
+  it("renders correct city name", () => {
+    expect(wrapper.find("h4").text()).toBe(city.name);
   });
 });
