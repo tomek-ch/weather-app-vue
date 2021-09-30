@@ -1,6 +1,8 @@
 <template>
-  <header class="d-flex justify-content-between mb-4 align-items-center">
-    <router-link to="/"><h1>Weather app</h1></router-link>
+  <header class="d-flex justify-content-between mb-4 align-items-baseline">
+    <router-link to="/">
+      <h1>Weather app</h1>
+    </router-link>
     <div>
       <div v-if="user" class="d-flex align-items-baseline">
         {{ user.email }}
