@@ -32,10 +32,5 @@ async function getWeather(location: string) {
   }
 }
 
-export const getCityByName = (name: string) => {
-  return getWeather(`q=${name}`);
-};
-
-export const getCityById = (id: number) => {
-  return getWeather(`id=${id}`);
-};
+export const getCityByName = (name: string) => getWeather(`q=${name}`);
+export const getCityById = (id: number) => getWeather(`id=${id}`);
