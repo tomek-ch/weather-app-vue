@@ -1,6 +1,5 @@
-import { shallowMount, mount } from "@vue/test-utils";
+import { shallowMount } from "@vue/test-utils";
 import AuthForm from "@/components/AuthForm.vue";
-import { nextTick } from "vue";
 
 describe("Alert.vue", () => {
   it("renders a button with appropriate label", () => {
@@ -47,7 +46,7 @@ describe("Alert.vue", () => {
   });
 
   it("submits correct data", async () => {
-    const wrapper = mount(AuthForm);
+    const wrapper = shallowMount(AuthForm);
     const email = "test@test.com";
     const password = "123456";
 
