@@ -12,4 +12,9 @@ describe("Alert.vue", () => {
     const text = wrapper.find("button").text();
     expect(text).toMatch(label);
   });
+
+  it("is disabled by default", () => {
+    const wrapper = shallowMount(AuthForm, {});
+    expect(wrapper.find("button").element.disabled).toBe(true);
+  });
 });
