@@ -27,6 +27,7 @@ import Spinner from "./components/Spinner.vue";
 const cityList = ref<number[]>([]);
 const weatherData = ref<CityWeather[]>([]);
 
+// Sync the list of user's cities
 watchEffect(() => {
   if (user.value) {
     getUserCities(user.value.uid)
