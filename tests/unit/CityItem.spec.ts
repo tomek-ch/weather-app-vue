@@ -29,4 +29,10 @@ describe("CityItem.vue", () => {
       `/city/${city.name}`
     );
   });
+
+  it("displays the correct temperature", () => {
+    expect(wrapper.find("div > div:not(:last-child)").text()).toBe(
+      `${city.temperature}°C`
+    );
+  });
 });
