@@ -19,12 +19,14 @@ async function getWeather(location: string) {
           timestamp: dt,
         }));
 
+      const { id, name, timezone } = data.city;
+      const { temp, humidity } = data.list[0].main;
       return {
-        id: data.city.id,
-        name: data.city.name,
-        timezone: data.city.timezone,
-        temperature: data.list[0].main.temp,
-        humidity: data.list[0].main.humidity,
+        id,
+        name,
+        timezone,
+        temperature: temp,
+        humidity,
         icon: `http://openweathermap.org/img/wn/${data.list[0].weather[0].icon}@2x.png`,
         forecast,
       };
