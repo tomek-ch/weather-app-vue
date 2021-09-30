@@ -35,4 +35,13 @@ describe("Chart.vue", () => {
       expect(label.text()).toBe(data[idx].label);
     });
   });
+
+  it("renders correct labels on the y axis", () => {
+    const labels = wrapper.findAll(".y-labels div");
+    const correctValues = [max, max / 2, 0];
+
+    labels.forEach((label, idx) => {
+      expect(label.text()).toBe(`${correctValues[idx]}${unit}`);
+    });
+  });
 });
