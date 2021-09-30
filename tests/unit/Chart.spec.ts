@@ -24,4 +24,8 @@ describe("Chart.vue", () => {
       expect(height).toBe(`${(data[idx].value / max) * 100}%`)
     );
   });
+
+  it("renders bars of correct color", () => {
+    expect(bars[0].element.style.backgroundColor).toBe(color);
+  });
 });
