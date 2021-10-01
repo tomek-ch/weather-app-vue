@@ -10,7 +10,7 @@
     </label>
     <button
       class="btn btn-primary"
-      :disabled="!email.includes('@') || password.length < 6"
+      :disabled="!/^\S+@\S+(\.\S+)+$/.test(email) || password.length < 6"
     >
       {{ label }}
     </button>
