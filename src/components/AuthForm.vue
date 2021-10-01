@@ -2,11 +2,16 @@
   <form @submit.prevent="$emit('auth-submit', email, password, handleError)">
     <label>
       Email
-      <input v-model="email" class="form-control mt-1" />
+      <input v-model="email" class="form-control mt-1" @input="hideError" />
     </label>
     <label>
       Password
-      <input v-model="password" class="form-control mt-1" type="password" />
+      <input
+        v-model="password"
+        class="form-control mt-1"
+        type="password"
+        @input="hideError"
+      />
     </label>
     <button
       class="btn btn-primary"
@@ -31,6 +36,7 @@ defineEmits(["auth-submit"]);
 const email = ref("");
 const password = ref("");
 const { error, handleError } = useError();
+const hideError = () => handleError("");
 </script>
 
 <style scoped>
