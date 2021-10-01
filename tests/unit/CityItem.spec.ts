@@ -35,4 +35,10 @@ describe("CityItem.vue", () => {
       `${city.temperature}°C`
     );
   });
+
+  it("displays the correct humidity", () => {
+    expect(wrapper.find("a > div > div:last-child").text()).toBe(
+      `Humidity: ${city.humidity}%`
+    );
+  });
 });
