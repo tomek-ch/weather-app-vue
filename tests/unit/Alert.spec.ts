@@ -8,8 +8,7 @@ describe("Alert.vue", () => {
       props: { msg },
     });
 
-    const text = wrapper.find("div").text();
-    expect(text).toMatch(msg);
+    expect(wrapper.text()).toMatch(msg);
   });
 
   it("doesn't render an empty msg", () => {

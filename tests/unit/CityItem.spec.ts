@@ -31,14 +31,10 @@ describe("CityItem.vue", () => {
   });
 
   it("displays the correct temperature", () => {
-    expect(wrapper.find("div > div:not(:last-child)").text()).toBe(
-      `${city.temperature}°C`
-    );
+    expect(wrapper.text()).toContain(`${city.temperature}°C`);
   });
 
   it("displays the correct humidity", () => {
-    expect(wrapper.find("a > div > div:last-child").text()).toBe(
-      `Humidity: ${city.humidity}%`
-    );
+    expect(wrapper.text()).toContain(`Humidity: ${city.humidity}%`);
   });
 });
