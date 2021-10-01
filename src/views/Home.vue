@@ -69,6 +69,7 @@ const addCity = async () => {
     addUserCity(user.value.uid, data.id);
     cityList.value.push(data.id);
     weatherData.value.push(data);
+    input.value = "";
   } else if (!data) {
     handleError("Could not find that city");
   } else {
