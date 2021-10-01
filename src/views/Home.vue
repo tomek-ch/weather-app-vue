@@ -1,7 +1,12 @@
 <template>
   <div>
     <form @submit.prevent="addCity" class="mb-3">
-      <input v-model="input" class="form-control" placeholder="London" />
+      <input
+        v-model="input"
+        class="form-control"
+        placeholder="London"
+        @input="handleError('')"
+      />
       <button
         class="btn btn-primary"
         :disabled="
