@@ -22,6 +22,7 @@
         @delete-city="deleteCity"
       />
     </div>
+    <Spinner v-if="isLoading" />
   </div>
 </template>
 
@@ -36,11 +37,13 @@ import { user } from "@/auth/store";
 import { addUserCity, deleteUserCity, getUserCities } from "@/db";
 import getCities from "@/utils/getCities";
 import { getCityByName } from "@/utils/getCity";
+import Spinner from "@/components/Spinner.vue";
 
 const input = ref("");
 const { error, handleError } = useError();
 const cityList = ref<number[]>([]);
 const weatherData = ref<CityWeather[]>([]);
+const isLoading = ref(true);
 
 // Sync the list of user's cities
 watchEffect(() => {
@@ -48,6 +51,7 @@ watchEffect(() => {
     getUserCities(user.value.uid)
       .then((userCities) => (cityList.value = userCities))
       .then(async () => (weatherData.value = await getCities(cityList.value)))
+      .then(() => (isLoading.value = false))
       .catch(console.log);
   } else {
     cityList.value = [];
