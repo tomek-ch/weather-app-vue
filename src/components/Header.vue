@@ -6,7 +6,7 @@
     <div>
       <div v-if="user" class="d-flex align-items-baseline">
         {{ user.email }}
-        <button class="btn close ml-3" @click="logOut">
+        <button class="btn close ml-3" @click="$emit('log-out')">
           <LogOut />
         </button>
       </div>
@@ -21,8 +21,12 @@
 </template>
 
 <script setup lang="ts">
-import { user, logOut } from "@/auth/store";
 import LogOut from "@/icons/LogOut.vue";
+import { PropType } from "@vue/runtime-core";
+import { User } from "firebase/auth";
+
+defineProps({ user: { type: Object as PropType<User | null> } });
+defineEmits(["log-out"]);
 </script>
 
 <style scoped>
