@@ -14,8 +14,13 @@
       </button>
     </form>
     <Alert :msg="error" variant="warning" />
-    <div v-for="city in weatherData" :key="city.id" class="list-group">
-      <CityItem :city="city" @delete-city="deleteCity" />
+    <div class="list-group">
+      <CityItem
+        v-for="city in weatherData"
+        :key="city.id"
+        :city="city"
+        @delete-city="deleteCity"
+      />
     </div>
   </div>
 </template>

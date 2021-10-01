@@ -1,5 +1,5 @@
 <template>
-  <div class="list-group-item list-group-item-action d-flex mb-3">
+  <div class="list-group-item list-group-item-action d-flex mb-4">
     <button class="close mr-4" @click="$emit('delete-city', city.id)">
       <Trash />
     </button>
