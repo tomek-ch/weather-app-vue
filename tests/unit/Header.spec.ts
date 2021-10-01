@@ -30,4 +30,8 @@ describe("Header.vue", () => {
   it("renders a sign out button", () => {
     expect(wrapperWithUser.find("button").exists()).toBe(true);
   });
+
+  it("doesn't render auth links when there is a user", () => {
+    expect(wrapperWithUser.findAllComponents(RouterLinkStub).length).toBe(1);
+  });
 });
