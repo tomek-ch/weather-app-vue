@@ -20,4 +20,8 @@ describe("Header.vue", () => {
   it("renders user's email", () => {
     expect(wrapperWithUser.text()).toContain(user.email);
   });
+
+  it("renders a sign out button", () => {
+    expect(wrapperWithUser.find("button").exists()).toBe(true);
+  });
 });
