@@ -34,4 +34,12 @@ describe("Header.vue", () => {
   it("doesn't render auth links when there is a user", () => {
     expect(wrapperWithUser.findAllComponents(RouterLinkStub).length).toBe(1);
   });
+
+  it("emits a sign out event", async () => {
+    await wrapperWithUser.find("button").trigger("click");
+    const emitted = wrapperWithUser.emitted();
+
+    expect(emitted).toHaveProperty("log-out");
+    expect(emitted["log-out"]).toHaveLength(1);
+  });
 });
