@@ -1,17 +1,17 @@
 import { shallowMount, RouterLinkStub } from "@vue/test-utils";
 import Header from "@/components/Header.vue";
 
-const stubs = { RouterLink: RouterLinkStub };
 const user = { email: "test email" };
+const options = { global: { stubs: { RouterLink: RouterLinkStub } } };
 
 const wrapperWithUser = shallowMount(Header, {
   props: { user },
-  global: { stubs },
+  ...options,
 });
 
 const wrapperWithoutUser = shallowMount(Header, {
   props: { user: null },
-  global: { stubs },
+  ...options,
 });
 
 describe("Header.vue", () => {
